@@ -32,12 +32,55 @@ const userSchema = mongoose.Schema({
 
 //model
 const userModel = mongoose.model("user", userSchema)
+
+
 //api
 app.get("/", (req, res) => {
     res.send("Server is running")
 })
 
-app.post("/signup", (req, res)=>{
+
+//signup API
+app.post("/signup", async(req, res)=>{
+
     console.log(req.body)
+    const {email} = req.body
+
+     await userModel.findOne({email : email})
+        .then(function(result) {
+        console.log(result)
+        //console.log(err)
+        if(result) {
+            res.send({message : "Email id is already registered", alert : false})
+        }
+        else {
+            const data = userModel(req.body)
+            const save = data.save()
+            res.send({message : "Successfully signed up", alert : true})
+        }
+    })
+})
+
+//login API 
+app.post("/login", (req, res)=> {
+    console.log(req.body)
+    const {email} = req.body
+    userModel.findOne({email : email})
+    .then( function (result) {
+        if(result) {
+            const dataSend = {
+                _id : result._id,
+                firstName : result.firstName,
+                lastName : result.lastName,
+                email : result.email,
+                image : result.image,
+            }
+            console.log(dataSend)
+            res.send({message : "Login is Successfull.", alert : true, data : dataSend})
+        }
+        else {
+            res.send({message : "Email is not available, please sign up", alert : false})
+        }
+    })
 })
 app.listen(PORT, () => console.log("Server is running at port : " + PORT))

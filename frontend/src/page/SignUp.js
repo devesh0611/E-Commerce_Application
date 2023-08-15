@@ -4,6 +4,7 @@ import {BiSolidShow, BiSolidHide} from "react-icons/bi";
 import {Link} from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import { ImagetoBase64 } from "../utility/imagetoBase64";
+import { toast } from "react-hot-toast";
 
 const SignUp = () => {
     const navigate = useNavigate()
@@ -62,8 +63,12 @@ const SignUp = () => {
                 })
                 const dataRes = await fetchData.json()
                 console.log(dataRes)
-                alert("successfull")
-                navigate("/login")
+                //alert(dataRes.message)
+                toast(dataRes.message)
+                if(dataRes.alert) {
+                    navigate("/login")
+                }
+                
             }
             else {
                 alert("password and confirm password not equal")
