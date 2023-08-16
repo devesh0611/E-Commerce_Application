@@ -23,8 +23,8 @@ const Login = () => {
     const navigate = useNavigate()
 
     const userData = useSelector(state => state)
-    console.log(userData.user)
-
+    // console.log(userData.user)
+    // console.log(userData.user.firstName)
     const dispatch = useDispatch()
 
     //console.log(data);
@@ -51,7 +51,7 @@ const Login = () => {
                 body : JSON.stringify(data)
             })
             const dataRes = await fetchData.json()
-            console.log(dataRes)
+            //console.log(dataRes)
             if(dataRes.alert) {
                 dispatch(loginRedux(dataRes))
                 setTimeout(()=> {
@@ -59,7 +59,7 @@ const Login = () => {
                 }, 1000);
                 
             }
-            toast(userData.user.firstName + " " + dataRes.message)
+            toast(dataRes.message)
         }
         else {
             alert("Please Enter required fields")

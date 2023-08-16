@@ -38,7 +38,7 @@ const SignUp = () => {
     }
     const handleUploadProfileImage = async(e) => {
         const data = await ImagetoBase64(e.target.files[0])
-        console.log(data)
+        // console.log(data)
         setData( (preve) => {
             return {
                 ...preve,
@@ -62,7 +62,7 @@ const SignUp = () => {
                     body : JSON.stringify(data)
                 })
                 const dataRes = await fetchData.json()
-                console.log(dataRes)
+                // console.log(dataRes)
                 //alert(dataRes.message)
                 toast(dataRes.message)
                 if(dataRes.alert) {
