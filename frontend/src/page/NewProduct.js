@@ -53,6 +53,16 @@ const NewProduct = () => {
             const fetchRes = await fetchData.json()
             console.log(fetchRes)
             toast(fetchRes.message)
+
+            setData(() => {
+                return {
+                    name : "",
+                    category : "",
+                    image : "",
+                    price: "",
+                    description : "",
+                }
+            })
         }
         else {
             toast("Enter required Fields")
@@ -63,10 +73,10 @@ const NewProduct = () => {
         <div className="p-4">
             <form className="m-auto w-full max-w-md shadow flex flex-col p-3 bg-white" onSubmit={handleSubmit}>
                 <label htmlFor="name">Name</label>
-                <input type={"text"} name="name" className="bg-slate-200 p-1 my-2" onClick={handleOnChange} />
+                <input type={"text"} name="name" className="bg-slate-200 p-1 my-2" onChange={handleOnChange} value={data.name}/>
                 
                 <label htmlFor="category">Category</label>
-                <select className="bg-slate-200 p-1 my-2" id="category" name="category" onClick={handleOnChange}>
+                <select className="bg-slate-200 p-1 my-2" id="category" name="category" onChange={handleOnChange} value={data.category}>
                     <option value={"other"}>Select Category</option>
                     <option value={"fruits"}>Fruits</option>
                     <option value={"vegetables"}>Vegetables</option>
@@ -74,6 +84,10 @@ const NewProduct = () => {
                     <option value={"dosa"}>Dosa</option>
                     <option value={"pizza"}>Pizza</option>
                     <option value={"rice"}>Rice</option>
+                    <option value={"cake"}>Cake</option>
+                    <option value={"burger"}>Burger</option>
+                    <option value={"biryani"}>Biryani</option>
+                    <option value={"paneer"}>Paneer</option>
                 </select>
 
                 <label htmlFor="image">Image
@@ -87,10 +101,10 @@ const NewProduct = () => {
 
 
                 <label htmlFor="price" className="my-2">Price</label>
-                <input type ={"text"} name="price" className="bg-slate-200 p-1 my-2" onClick={handleOnChange} />
+                <input type ={"text"} name="price" className="bg-slate-200 p-1 my-2" onChange={handleOnChange} value={data.price}/>
 
                 <label htmlFor="description">Description</label>
-                <textarea rows={3} className="bg-slate-200 p-1 my-2 resize-none" name="description" onClick={handleOnChange}></textarea>
+                <textarea rows={3} className="bg-slate-200 p-1 my-2 resize-none" name="description" onChange={handleOnChange} value={data.description}></textarea>
 
                 <button className="max-w-[120] w-full m-auto bg-gray-600 hover:bg-gray-700 cursor-pointer text-white text-xl font-medium text-center py-1 rounded-full mt-4">Save</button>
             </form>

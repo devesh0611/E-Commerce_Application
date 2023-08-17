@@ -107,5 +107,10 @@ app.post("/uploadProduct", async(req, res)=>{
     res.send({message : "Uploaded Successfully"})
 })
 
+//
+app.get("/product", async(req, res)=> {
+    const data = await productModel.find({})
+    res.send(JSON.stringify(data))
+})
 //Server is running
 app.listen(PORT, () => console.log("Server is running at port : " + PORT))
