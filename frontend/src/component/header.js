@@ -31,9 +31,9 @@ const Header = () => {
             </div>
             </Link>
             <div className="flex item-center gap-4 md:gap-7">
-                <nav className="flex gap-4 md:gap-7 text-base md:text-lg h-full p-3.5">
+                <nav className="flex gap-4 md:gap-7 text-base md:text-lg h-full p-3.5 ">
                  <Link to ="">Home</Link>
-                 <Link to ="menu">Menu</Link>
+                 <Link to ="menu/64dde4f939bc653734443ce8">Menu</Link>
                  <Link to ="about">About</Link>
                  <Link to ="contact">Contact</Link>
                 </nav>
@@ -48,14 +48,19 @@ const Header = () => {
                     }
                     
                     </div>
-                    {showMenu && (<div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col">
+                    {showMenu && (<div className="absolute right-2 bg-white py-2 px-2 shadow drop-shadow-md flex flex-col min-w-[80px] text-center">
                         {
                             userData.email === process.env.REACT_APP_ADMIN_EMAIL && <Link to={"newproduct"} className="whitespace-nowrap cursor-pointer">New Product</Link>
                         }
                         {
                             userData.image ? <p className="cursor-pointer" onClick={handleLogout}>Logout ({userData.firstName}) </p> : <Link to={"login"} className="whitespace-nowrap cursor-pointer">Login</Link>
                         }
-                        
+                        <nav className="flex text-base h-full flex-col md:hidden">
+                        <Link to ="">Home</Link>
+                        <Link to ="menu/64dde4f939bc653734443ce8">Menu</Link>
+                        <Link to ="about">About</Link>
+                        <Link to ="contact">Contact</Link>
+                        </nav>
                     </div>)}
                     
                 </div>

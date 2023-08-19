@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import HomeCard from "../component/HomeCard";
 import { useSelector } from "react-redux"
 import CardFeature from "../component/CardFeature";
 import {GrPrevious, GrNext} from "react-icons/gr"
+import  FilterProduct  from "../component/FilterProduct"
 
 const Home = () => {
     const  productData = useSelector((state)=>state.product.productList)
@@ -21,6 +22,25 @@ const Home = () => {
     }
     const prevProduct = () => {
         slideProductRef.current.scrollLeft -= 200
+    }
+
+    const categoryList = [...new Set(productData.map(e1=>e1.category))]
+    console.log(categoryList)
+
+    // filter data display 
+    const [filterby, setFilterBy] = useState("") 
+    const [dataFilter, setDataFilter] = useState([])
+    useEffect(()=>{
+       setDataFilter(productData)
+    }, [productData])
+
+    const handleFilterProduct = (category) => {
+        const filter = productData.filter(e1 => e1.category.toLowerCase() === category.toLowerCase())
+        setDataFilter(()=>{
+            return [
+               ...filter
+            ]
+        })
     }
     return (
         <div className="p-2 md:p-4">
@@ -63,7 +83,7 @@ const Home = () => {
         </div>
         <div className="">
             <div className="flex w-full items-center">
-            <h2 className="font-bold text-2xl text-slate-800 mb-2">Fresh Vegetables</h2>
+            <h2 className="font-bold text-2xl text-slate-800 mb-2 mt-20">Fresh Vegetables</h2>
             <div className="ml-auto flex gap-4">
                 <button onClick={prevProduct} className="bg-slate-300 hover:bg-slate-400 text-lg p-1">
                     <GrPrevious />
@@ -91,6 +111,39 @@ const Home = () => {
                     loadingArrayFeature.map(e1 => 
                     <CardFeature loading="Loading..." 
                     />)
+                }
+            </div>
+        </div>
+
+        <div className="">
+            <h2 className="font-bold text-2xl text-slate-800 mb-4 mt-20">
+                Your Product
+            </h2>
+
+            <div className=" flex gap-4 justify-center overflow-scroll scrollbar-none">
+                {
+                    categoryList[0] && categoryList.map(e1 => {
+                        return (
+                            <FilterProduct category={e1} onClick={()=>handleFilterProduct(e1)}/>
+                        )
+                    })
+                }
+                
+            </div>
+
+            <div className="flex flex-wrap justify-center gap-4 my-4">
+                {
+                    dataFilter.map(e1 => {
+                        return (
+                            <CardFeature
+                               key={e1._id}
+                               image={e1.image}
+                               name={e1.name}
+                               category={e1.category}
+                               price={e1.price}
+                            />
+                        )
+                    })
                 }
             </div>
         </div>
