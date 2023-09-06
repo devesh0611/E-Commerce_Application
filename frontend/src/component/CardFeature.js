@@ -1,12 +1,12 @@
 import react from 'react'
 import { Link } from "react-router-dom"
 
-const CardFeature = ({image, name, price, category, loading, key}) => {
+const CardFeature = ({image, name, price, category, loading, id}) => {
     return (
     <div className='w-full min-w-[200px] max-w-[200px] bg-white hover:shadow-lg drop-shadow-lg pt-5 px-4 cursor-pointer flex flex-col justify-center'>
         {
             image ? <>
-            <Link to={`menu/${key}`}>
+            <Link to={`/menu/${id}`} onClick={()=>window.scrollTo({top:"0", behaviour:"smooth"})}>
             <div className='w-40 min-h-[180px]'>
                     <img src={image} className='h-full w-full' />
         </div>

@@ -1,21 +1,23 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import AllProduct from "../component/AllProduct";
 
 const Menu = () => {
     const {filterby} = useParams()
     const productData = useSelector(state => state.product.productList)
     console.log(productData)
-    const productDisplay = productData.filter((e1) => e1._id === filterby)[0]
+    const productDisplay = productData.filter(e1 => e1._id === filterby)[0]
     console.log(productDisplay)
-    console.log(productDisplay.image)
+    // console.log(productDisplay.image)
     return (
+        <div>
         <div className="p-2 md:p-4">
             <div className="w-full max-w-4xl m-auto md:flex bg-white gap-5">
-                <div className="w-1/2 max-w-lg overflow-hidden">
-                    <img src={productDisplay.image} className="hover:scale-105 transition-all"/>
+                <div className="w-1/2 max-w-[400px] overflow-hidden max-h-[300px] min-w-[300px]">
+                    <img src={productDisplay.image} className="hover:scale-105 transition-all h-full"/>
                 </div>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1 max-w-[700px]">
                 <h3 className='font-semibold text-slate-600 capitalize text-lg mt-4'>{productDisplay.name}</h3>
                 <p className='text-slate-500 font-medium text-2xl'>{productDisplay.category}</p>
                 <p className='font-bold md:text-2xl'><span className='text-red-500'>₹</span><span>{productDisplay.price}</span></p>
@@ -31,6 +33,8 @@ const Menu = () => {
                 </div>
                 </div>
             </div>
+        </div>
+        <AllProduct heading={"Related Products"} />
         </div>
     )
 }

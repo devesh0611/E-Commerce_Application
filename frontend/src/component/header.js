@@ -38,8 +38,9 @@ const Header = () => {
                  <Link to ="contact">Contact</Link>
                 </nav>
                 <div className="text-2xl text-slate-600 relative p-3.5">
-                <BsCartFill/>
+                <Link to={"cart"}><BsCartFill/>
                 <div className="absolute top-2 right-1 text-white bg-red-500 h-5 w-5 rounded-full text-base text-center">0</div>
+                </Link>
                 </div>
                 <div className="text-slate-600 p-3.5" onClick={handleShowMenu}>
                     <div className="text-3xl cursor-pointer w-10 h-10 rounded-full overflow-hidden drop-shadow">
