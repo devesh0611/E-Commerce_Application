@@ -20,6 +20,7 @@ const Header = () => {
         toast("Logout successfully")
     }
 
+    const cartItemNumber = useSelector((state)=>state.product.cartItem)
     console.log(process.env.REACT_APP_ADMIN_EMAIL)
     return (
         <header className="fixed shadow-md w-full h-16 px-2 mid:px-4 z-50 bg-white">
@@ -39,7 +40,7 @@ const Header = () => {
                 </nav>
                 <div className="text-2xl text-slate-600 relative p-3.5">
                 <Link to={"cart"}><BsCartFill/>
-                <div className="absolute top-2 right-1 text-white bg-red-500 h-5 w-5 rounded-full text-base text-center">0</div>
+                <div className="absolute top-2 right-1 text-white bg-red-500 h-5 w-5 rounded-full text-base text-center">{cartItemNumber.length}</div>
                 </Link>
                 </div>
                 <div className="text-slate-600 p-3.5" onClick={handleShowMenu}>

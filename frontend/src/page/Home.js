@@ -96,8 +96,8 @@ const Home = () => {
                              />
                         )
                     }) :
-                    loadingArrayFeature.map(e1 => 
-                    <CardFeature loading="Loading..." 
+                    loadingArrayFeature.map((e1, index) => 
+                    <CardFeature loading="Loading..." key={index}
                     />)
                 }
             </div>

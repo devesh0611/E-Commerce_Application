@@ -9,6 +9,7 @@ const AllProduct = ({heading}) => {
     console.log(productData)
     const categoryList = [...new Set(productData.map(e1=>e1.category))]
     console.log(categoryList)
+    const loadingArrayFeature = new Array(10).fill(null)
     // filter data display 
     const [filterby, setFilterBy] = useState("") 
     const [dataFilter, setDataFilter] = useState([])
@@ -34,17 +35,27 @@ const AllProduct = ({heading}) => {
 
             <div className=" flex gap-4 justify-center overflow-scroll scrollbar-none">
                 {
-                    categoryList[0] && categoryList.map(e1 => {
+                    categoryList[0] ? categoryList.map(e1 => {
                         return (
-                            <FilterProduct category={e1} onClick={()=>handleFilterProduct(e1)}/>
+                            <FilterProduct category={e1} 
+                            key={e1}
+                            onClick={()=>handleFilterProduct(e1)}/>
                         )
                     })
+                    :
+                    (<div className='min-h-[150px] flex justify-center items-center'>
+                    <p>Loading...</p>
+                    </div>
+                    )
+
+
                 }
                 
             </div>
 
             <div className="flex flex-wrap justify-center gap-4 my-4">
                 {
+                    dataFilter[0] ? 
                     dataFilter.map(e1 => {
                         return (
                             <CardFeature
@@ -57,6 +68,10 @@ const AllProduct = ({heading}) => {
                             />
                         )
                     })
+                    :
+                    loadingArrayFeature.map((e1, index)=>(
+                        <CardFeature loading="Loading..." key={index}/>
+                    ))
                 }
             </div>
         </div>
