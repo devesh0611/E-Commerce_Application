@@ -8,11 +8,8 @@ import AllProduct from "../component/AllProduct";
 
 const Home = () => {
     const  productData = useSelector((state)=>state.product.productList)
-    console.log(productData)
     const homeProductCartList = productData.slice(20, 23)
     const homeProductCartListVegetable = productData.filter(e1 => e1.category === "vegetables", [])
-    console.log(homeProductCartListVegetable)
-
     const loadingArray = new Array(3).fill(null)
     const loadingArrayFeature = new Array(10).fill(null)
 
@@ -81,7 +78,7 @@ const Home = () => {
             </div>
             </div>
             
-            <div className="flex gap-5 overflow-scroll scrollbar-none scroll-smooth transition-all" ref={slideProductRef}>
+            <div className="flex gap-5 overflow-scroll scrollbar-hide scroll-smooth transition-all" ref={slideProductRef}>
                 {
                     homeProductCartListVegetable[0] ? 
                     homeProductCartListVegetable.map(e1 => {

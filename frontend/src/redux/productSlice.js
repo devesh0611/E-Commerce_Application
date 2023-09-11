@@ -11,13 +11,10 @@ export const productSlice = createSlice({
     initialState,
     reducers : {
         setDataProduct : (state, action)=>{
-            console.log(action)
             state.productList = [...action.payload]
         },
         addcartItem : (state, action)=>{
-            console.log(action)
             const check = state.cartItem.some(e1=>e1._id === action.payload._id)
-            console.log(check)
             const total = action.payload.price
             if(check) {
                 toast("Item is already in Cart");
@@ -30,10 +27,8 @@ export const productSlice = createSlice({
             
         },
         deleteCartItem : (state, action)=>{
-            console.log(action.payload)
             toast("One Item is Deleted")
             const index = state.cartItem.findIndex((e1)=>e1._id === action.payload)
-            console.log(index)
             state.cartItem.splice(index, 1)
         },
         increaseQty : (state, action)=>{

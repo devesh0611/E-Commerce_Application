@@ -26,7 +26,6 @@ const SignUp = () => {
             image : "",
         }
     )
-    console.log(data);
     const handleOnChange = (e) => {
         const {name, value} = e.target
         setData((preve) => {
@@ -38,7 +37,6 @@ const SignUp = () => {
     }
     const handleUploadProfileImage = async(e) => {
         const data = await ImagetoBase64(e.target.files[0])
-        // console.log(data)
         setData( (preve) => {
             return {
                 ...preve,
@@ -46,7 +44,6 @@ const SignUp = () => {
             }
         })
     }
-    console.log(process.env.REACT_APP_SERVER_DOMAIN)
     const handleSubmit = async(e) => {
         e.preventDefault();
         const {firstName, email, password, confirmPassword} = data;
@@ -62,8 +59,6 @@ const SignUp = () => {
                     body : JSON.stringify(data)
                 })
                 const dataRes = await fetchData.json()
-                // console.log(dataRes)
-                //alert(dataRes.message)
                 toast(dataRes.message)
                 if(dataRes.alert) {
                     navigate("/login")

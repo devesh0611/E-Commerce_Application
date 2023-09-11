@@ -10,8 +10,6 @@ const Header = () => {
     const [showMenu, setShowMenu] = useState(false);
     const userData = useSelector((state)=>state.user)
     const dispatch = useDispatch()
-    // console.log(userData)
-    // console.log(userData.firstName)
     const handleShowMenu = () => {
         setShowMenu(preve => !preve)
     }
@@ -21,10 +19,9 @@ const Header = () => {
     }
 
     const cartItemNumber = useSelector((state)=>state.product.cartItem)
-    console.log(process.env.REACT_APP_ADMIN_EMAIL)
     return (
         <header className="fixed shadow-md w-full h-16 px-2 mid:px-4 z-50 bg-white">
-        { /* Desktop */}
+        { }
            <div className="flex item-center h-full justify-between">
             <Link to = {""}>
             <div className="h-14">
@@ -32,12 +29,14 @@ const Header = () => {
             </div>
             </Link>
             <div className="flex item-center gap-4 md:gap-7">
-                <nav className="flex gap-4 md:gap-7 text-base md:text-lg h-full p-3.5 ">
+                <div className="flex item-center gap-4 md:gap-7 hidden sm:block">
+                <nav className="flex gap-4 md:gap-7 text-base md:text-lg h-full p-3.5">
                  <Link to ="">Home</Link>
                  <Link to ="menu/64dde4f939bc653734443ce8">Menu</Link>
                  <Link to ="about">About</Link>
                  <Link to ="contact">Contact</Link>
                 </nav>
+                </div>
                 <div className="text-2xl text-slate-600 relative p-3.5">
                 <Link to={"cart"}><BsCartFill/>
                 <div className="absolute top-2 right-1 text-white bg-red-500 h-5 w-5 rounded-full text-base text-center">{cartItemNumber.length}</div>
